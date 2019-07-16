@@ -12,7 +12,7 @@ export const initialState: State = {
 export const reducer = (state = initialState, action: CounterAction): State => {
   switch (action.type) {
     case INCREMENT:
-      return { ...state, value: state.value + action.payload };
+      return { ...state, value: state.value + state.value };
     default:
       return state;
   }

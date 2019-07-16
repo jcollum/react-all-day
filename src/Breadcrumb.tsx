@@ -4,22 +4,22 @@ export interface Props {
   values: number[];
 }
 
-export function roundAndPad(n:number, digits:number) {
-  var negative = false;
+export function roundAndPad(n: number, digits: number) {
+  let negative = false;
   if (digits === undefined) {
-      digits = 0;
+    digits = 0;
   }
-      if( n < 0) {
-      negative = true;
+  if (n < 0) {
+    negative = true;
     n = n * -1;
   }
-  var multiplicator = Math.pow(10, digits);
+  const multiplicator = Math.pow(10, digits);
   n = parseFloat((n * multiplicator).toFixed(11));
-  n = (Math.round(n) / multiplicator).toFixed(3);
-  if( negative ) {    
-      n = (n * -1).toFixed(2);
-  }
-  return n;
+  const r =
+    negative === true
+      ? (n * -1).toFixed(2)
+      : (Math.round(n) / multiplicator).toFixed(3);
+  return r;
 }
 
 export class Breadcrumb extends React.PureComponent<Props> {

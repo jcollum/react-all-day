@@ -1,16 +1,19 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import {actionCreators} from './redux/actions/counter'
 import "./App.css";
-import { RootState } from "./redux/reducers";
+import { RootState } from "./redux/reducers"; 
 
 interface ConnectProps {
-  counter: number;
+  counter: number,
+  onIncrement: any
 }
 
 type Props = {} & ConnectProps;
 
 export class App extends React.PureComponent<Props> {
   render() {
+    const {onIncrement} = this.props
     return (
       <>
         <section className="hero is-primary">
@@ -32,7 +35,7 @@ export class App extends React.PureComponent<Props> {
           {/* Challenge 5: <div className="notification is-danger" /> */}
           <div className="field is-grouped">
             <p className="control">
-              <button className="button" id="increment-btn">
+              <button className="button" id="increment-btn" onClick={onIncrement}>
                 Click to increment
               </button>
             </p>
@@ -56,5 +59,10 @@ export class App extends React.PureComponent<Props> {
 const mapStateToProps = (state: RootState) => ({
   counter: state.counter.value
 });
+ 
+const dispatchToProps = {
+  onIncrement: actionCreators.increment,
+};
 
-export default connect(mapStateToProps)(App);
+
+export default connect(mapStateToProps,dispatchToProps)(App);
